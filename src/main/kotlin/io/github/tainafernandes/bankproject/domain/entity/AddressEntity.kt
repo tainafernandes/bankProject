@@ -1,4 +1,4 @@
-package io.github.tainafernandes.bankproject.domain.model
+package io.github.tainafernandes.bankproject.domain.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -7,19 +7,19 @@ import jakarta.persistence.Id
 import org.hibernate.Hibernate
 
 @Entity
-data class AddressModel(
+data class AddressEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
-    val street: String,
-    val number: String,
-    val complement: String,
-    val cep: String
+    var street: String,
+    var number: String,
+    var complement: String,
+    var cep: String
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as AddressModel
+        other as AddressEntity
 
         return id == other.id
     }

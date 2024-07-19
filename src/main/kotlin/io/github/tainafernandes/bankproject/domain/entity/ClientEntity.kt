@@ -1,25 +1,24 @@
-package io.github.tainafernandes.bankproject.domain.model
+package io.github.tainafernandes.bankproject.domain.entity
 
-import io.github.tainafernandes.bankproject.application.entity.Address
 import jakarta.persistence.*
 import org.hibernate.Hibernate
 import java.math.BigDecimal
 
 @Entity
-data class ClientModel(
+data class ClientEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
-    val name: String,
-    val accountValue: BigDecimal,
+    var name: String,
+    var accountValue: BigDecimal,
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "id", referencedColumnName = "id")
-    val address: AddressModel
+    var address: AddressEntity
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as ClientModel
+        other as ClientEntity
 
         return id == other.id
     }
